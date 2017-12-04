@@ -1,11 +1,11 @@
 " OS detection
 let g:OS = substitute(system('uname'), '\n', '', '')
-if g:OS == 'Linux'
-        let OS = substitute(system('uname -o'), '\n', '', '')
+if g:OS == "Linux"
+        let g:OS = substitute(system('uname -o'), '\n', '', '')
 endif
 
 
-if g:OS == 'GNU/Linux'
+if g:OS == "GNU/Linux"
     execute pathogen#infect()
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
@@ -18,12 +18,13 @@ if g:OS == 'GNU/Linux'
     let g:syntastic_javascript_checkers = ['jshint']
     " show any linting errors immediately
     let g:syntastic_check_on_open = 1
+
+    set statusline+=%{SyntasticStatuslineFlag()}
 endif
 
 colo desert
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 set splitbelow
