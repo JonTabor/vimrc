@@ -34,13 +34,6 @@ set filetype=on
 
 set clipboard=unnamedplus
 
-
-" 1. base64-encode(visual-selection) -> F2 -> encoded base64-string
-:vnoremap <F2> c<c-r>=system("base64 -w 0", @")<cr><esc>
-
-" 2. base64-decode(visual-selection) -> F3 -> decoded string
-:vnoremap <F3> c<c-r>=system("base64 -d", @")<cr> 
-
 set number
 set relativenumber
 :augroup numbertoggle

@@ -23,10 +23,20 @@ set guioptions=Pc
 set incsearch
 set hlsearch
 
+execute pathogen#infect()
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:javascript_plugin_jsdoc = 1
+
 " use jshint for syntastic
-"let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['jshint']
 " show any linting errors immediately
-"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 1
+
+set statusline+=%{SyntasticStatuslineFlag()}
 
 set lines=150
 set columns=110
@@ -39,11 +49,14 @@ let g:screen_size_restore_pos = 1
 " For all Vim to use the same settings, change this to 0.
 let g:screen_size_by_vim_instance = 1
 
-" 1. base64-encode(visual-selection) -> F2 -> encoded base64-string
-:vnoremap <F2> c<c-r>=system("base64 -w 0", @")<cr><esc>
+" If base64 exists in the system, map F2 & F3 to encode/decode
+if filereadable("/usr/bin/base64")
+    " 1. base64-encode(visual-selection) -> F2 -> encoded base64-string
+    :vnoremap <F2> c<c-r>=system("base64 -w 0", @")<cr><esc>
 
-" 2. base64-decode(visual-selection) -> F3 -> decoded string
-:vnoremap <F3> c<c-r>=system("base64 -d", @")<cr> 
+    " 2. base64-decode(visual-selection) -> F3 -> decoded string
+    :vnoremap <F3> c<c-r>=system("base64 -d", @")<cr> 
+endif
 
 " set up the indenting
 set expandtab
