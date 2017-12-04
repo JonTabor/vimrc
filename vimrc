@@ -1,4 +1,24 @@
-execute pathogen#infect()
+" OS detection
+let g:OS = substitute(system('uname'), '\n', '', '')
+if g:OS == 'Linux'
+        let OS = substitute(system('uname -o'), '\n', '', '')
+endif
+
+
+if g:OS == 'GNU/Linux'
+    execute pathogen#infect()
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+
+    let g:javascript_plugin_jsdoc = 1
+
+    " use jshint for syntastic
+    let g:syntastic_javascript_checkers = ['jshint']
+    " show any linting errors immediately
+    let g:syntastic_check_on_open = 1
+endif
 
 colo desert
 
@@ -13,17 +33,6 @@ set filetype=on
 
 set clipboard=unnamedplus
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:javascript_plugin_jsdoc = 1
-
-" use jshint for syntastic
-let g:syntastic_javascript_checkers = ['jshint']
-" show any linting errors immediately
-let g:syntastic_check_on_open = 1
 
 " 1. base64-encode(visual-selection) -> F2 -> encoded base64-string
 :vnoremap <F2> c<c-r>=system("base64 -w 0", @")<cr><esc>
